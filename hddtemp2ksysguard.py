@@ -14,7 +14,7 @@ Sensor = namedtuple('Sensor', ['dev', 'dev_name', 'value', 'sign', 'type'])
 
 def get_sensors():
     with socket.create_connection((HDDTEMP_HOST, HDDTEMP_PORT)) as sock:
-        sock_file = sock.makefile()
+        sock_file = sock.makefile(errors='ignore')
         response = sock_file.read()
         sock_file.close()
     return parse(response)
